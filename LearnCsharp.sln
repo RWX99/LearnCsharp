@@ -5,6 +5,10 @@ VisualStudioVersion = 17.5.33516.290
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp1", "ConsoleApp1\ConsoleApp1.csproj", "{4E91EEBF-B90E-4DF0-9057-A3CD33118511}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "LearnWPF", "LearnWPF", "{AFA488E1-4FCD-40C1-9292-C9E1FAFE0CD4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Names", "Names\Names.csproj", "{703FF27E-1AE8-419F-AE73-3F5824BC0BBD}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfApp1", "WpfApp1\WpfApp1.csproj", "{5A60D4AC-57C3-4060-AA23-65F33DDD25CD}"
 EndProject
 Global
@@ -17,6 +21,10 @@ Global
 		{4E91EEBF-B90E-4DF0-9057-A3CD33118511}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E91EEBF-B90E-4DF0-9057-A3CD33118511}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E91EEBF-B90E-4DF0-9057-A3CD33118511}.Release|Any CPU.Build.0 = Release|Any CPU
+		{703FF27E-1AE8-419F-AE73-3F5824BC0BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{703FF27E-1AE8-419F-AE73-3F5824BC0BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{703FF27E-1AE8-419F-AE73-3F5824BC0BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{703FF27E-1AE8-419F-AE73-3F5824BC0BBD}.Release|Any CPU.Build.0 = Release|Any CPU
 		{5A60D4AC-57C3-4060-AA23-65F33DDD25CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{5A60D4AC-57C3-4060-AA23-65F33DDD25CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A60D4AC-57C3-4060-AA23-65F33DDD25CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -24,6 +32,10 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{703FF27E-1AE8-419F-AE73-3F5824BC0BBD} = {AFA488E1-4FCD-40C1-9292-C9E1FAFE0CD4}
+		{5A60D4AC-57C3-4060-AA23-65F33DDD25CD} = {AFA488E1-4FCD-40C1-9292-C9E1FAFE0CD4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {FD3B19B7-B385-468A-B8CD-4DF0B16A7B70}
