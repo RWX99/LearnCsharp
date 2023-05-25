@@ -13,23 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WpfApp1
+namespace ExpenseIt
 {
     /// <summary>
-    /// ExpenseReportPage.xaml 的交互逻辑
+    /// ExpenseItHome.xaml 的交互逻辑
     /// </summary>
-    public partial class ExpenseReportPage : Page
+    public partial class ExpenseItHome : Page
     {
-        public ExpenseReportPage()
+        public ExpenseItHome()
         {
             InitializeComponent();
         }
 
-        // Custom constructor to pass expense report data
-        public ExpenseReportPage(object data) : this()
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            // Bind to expense report data.
-            this.DataContext = data;
+            // View Expense Report
+            ExpenseReportPage expenseReportPage = new ExpenseReportPage(this.peopleListBox.SelectedItem);
+            this.NavigationService.Navigate(expenseReportPage);
         }
     }
 }

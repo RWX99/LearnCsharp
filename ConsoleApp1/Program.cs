@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,7 +15,32 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            
+            foreach (var item in Directory.GetFiles(@"C:\Users\liangty\Desktop\测试", "*", SearchOption.AllDirectories))
+            {
+                Console.WriteLine(GetFileHash(item));
+            }
+        }
+
+        /// <summary>
+        /// 获取文件的哈希值
+        /// </summary>
+        /// <param name="filePath">文件路径</param>
+        /// <returns></returns>
+        private static string GetFileHash(string filePath)
+        {
+            using (var md5 = MD5.Create())
+            {
+                using (var stream = File.OpenRead(filePath))
+                {
+                    var hashBytes = md5.ComputeHash(stream);
+                    var hashBuilder = new StringBuilder();
+                    foreach (byte b in hashBytes)
+                    {
+                        hashBuilder.Append(b.ToString("x2"));
+                    }
+                    return hashBuilder.ToString().ToUpper();
+                }
+            }
         }
 
         /// <summary>
