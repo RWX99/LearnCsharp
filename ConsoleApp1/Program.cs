@@ -15,10 +15,7 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            foreach (var item in Directory.GetFiles(@"C:\Users\liangty\Desktop\测试", "*", SearchOption.AllDirectories))
-            {
-                Console.WriteLine(GetFileHash(item));
-            }
+            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
         }
 
         /// <summary>
