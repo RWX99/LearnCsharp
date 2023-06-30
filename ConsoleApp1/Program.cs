@@ -4,8 +4,11 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,7 +18,81 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory));
+        }
+
+        /// <summary>
+        /// 获取公网IP地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetPublicIPAddress()
+        {
+            string publicIPAddress = string.Empty;
+            try
+            {
+                using (WebClient client = new WebClient())
+                {
+                    publicIPAddress = client.DownloadString("https://api.ipify.org");
+                }
+            }
+            catch
+            {
+                publicIPAddress = "获取公网IP地址失败";
+            }
+            return publicIPAddress;
+        }
+
+        /// <summary>
+        /// 获取IPV4地址
+        /// </summary>
+        /// <returns></returns>
+        public static string GetLocalIPv4()
+        {
+            string localIPv4 = string.Empty;
+            foreach (NetworkInterface ni in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet || ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211)
+                {
+                    foreach (UnicastIPAddressInformation ip in ni.GetIPProperties().UnicastAddresses)
+                    {
+                        if (ip.Address.AddressFamily == System.Net.Sockets.AddressFamily.InterNetwork)
+                        {
+                            localIPv4 = ip.Address.ToString();
+                            break;
+                        }
+                    }
+                }
+                if (!string.IsNullOrEmpty(localIPv4))
+                {
+                    break;
+                }
+            }
+            return localIPv4;
+        }
+
+        /// <summary>
+        /// 递归方法复制文件夹
+        /// </summary>
+        /// <param name="sourceDirectory">来源目录</param>
+        /// <param name="destinationDirectory">目的地目录</param>
+        private static void DirectoryCopy(string sourceDirectory, string destinationDirectory)
+        {
+            // 如果目标文件夹不存在，则创建目标文件夹
+            if (!Directory.Exists(destinationDirectory))
+            {
+                Directory.CreateDirectory(destinationDirectory);
+            }
+
+            // 复制共享盘中的子文件夹到本地
+            DirectoryInfo source = new DirectoryInfo(sourceDirectory);
+            DirectoryInfo destination = new DirectoryInfo(destinationDirectory);
+            foreach (FileInfo file in source.GetFiles())
+            {
+                file.CopyTo(Path.Combine(destination.FullName, file.Name), true);
+            }
+            foreach (DirectoryInfo subDirectory in source.GetDirectories())
+            {
+                DirectoryCopy(subDirectory.FullName, Path.Combine(destination.FullName, subDirectory.Name));
+            }
         }
 
         /// <summary>
@@ -46,7 +123,7 @@ namespace ConsoleApp1
         /// <param name="watchPath">要监视的文件夹路径</param>
         private static void WatchedFolder(string watchPath)
         {
-            if(!Directory.Exists(watchPath))
+            if (!Directory.Exists(watchPath))
             {
                 MessageBox.Show("要监视的目录不存在");
             }
